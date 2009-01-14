@@ -33,6 +33,11 @@ features(
   ],
 );
 
+use File::Find;
+my $files = '';
+find( sub { $files .= " $File::Find::name" if -f && /\.t$/ }, "t" );
+tests($files);
+
 auto_install_now();
 
 &Makefile->write;
